@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>Beyond The Boundaries</title>
+<meta name="description" content="Thoughts, reviews and ideas since 1999."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="shortcut icon" href="#">
+<link rel="stylesheet" type="text/css" href="{% static '/css/screen.css' %}"/>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,700,700italic|Playfair+Display:400,700,400italic,700italic"/>
+</head>
+<body class="home-template">
+    <div class="site-wrapper">
+        <nav class="main-nav overlay clearfix">
+            <a class="blog-logo" href="index.html"><img src="{% static '/img/logo.png' %}" alt="Fashion Critiques"/></a>
+            <ul id="menu">
+                <li class="nav-home nav-current" role="presentation"><a href="{% url 'home' %}">Home</a></li>
+                <li class="nav-about-us" role="presentation"><a href="{% url 'about' %}">About the Author</a></li>
+                <span class="socialheader">
+                <a href="#"><span class='symbol'>circletwitterbird</span></a>
+                <a href="#"><span class='symbol'>circlefacebook</span></a>
+                <a href="#"><span class='symbol'>circlegoogleplus</span></a>
+                <a href="mailto:wowthemesnet@gmail.com"><span class='symbol'>circleemail</span></a>
+                </span>
+            </ul>
+        </nav>
+        {% block content %}
+
+        {% endblock %}
+
+	<footer class="site-footer clearfix">
+        <a href="#top" id="back-to-top" class="back-top"></a>
+        </footer>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{% static '/js/masonry.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/jquery.fitvids.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/index.js' %}"></script>
+</body>
+</html>
