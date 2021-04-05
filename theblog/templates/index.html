@@ -29,7 +29,7 @@
 						</header>
 						<section class="post-excerpt">
 						<p>
-							{{ article.body|slice:":200"|safe }} <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
+							{{ article.body|truncatechars_html:200|safe }} <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
 						</p>
 							</section>
 						<footer class="post-meta">
