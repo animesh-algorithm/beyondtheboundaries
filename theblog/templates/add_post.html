@@ -15,8 +15,8 @@
                     <div class="col-md-12 col-lg-8">
                         <h1 class="text-center">Add Blog Post</h1>
                         <br>
-                        <div class="form-group">
-                            <form method="POST" style="font-size: medium;">
+                        <div class="form-group text-center">
+                            <form method="POST" style="font-size: medium;" class='container'>
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <textarea id="editor" cols="30" rows="30", placeholder="Type the article here..."></textarea>
