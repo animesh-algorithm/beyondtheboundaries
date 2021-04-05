@@ -9,7 +9,7 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        {% if user.id == 1 %}
+        {% if user.is_superuser %}
             <div class='container'>
                 <div class="row justify-content-md-center">
                     <div class="col-md-12 col-lg-8">

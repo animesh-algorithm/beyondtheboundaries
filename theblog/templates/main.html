@@ -33,7 +33,9 @@
                 <li class="nav-about-us" role="presentation"><a href="{% url 'about' %}">About the Author</a></li>
 
                 {% if user.is_authenticated %}
+                {% if user.is_superuser %}
                     <li class="nav-home nav-about_us" role="presentation"><a href="{% url 'add_post' %}">Add Post</a></li>
+                {% endif %}
                     <li class="nav-home nav-about_us" role="presentation"><a href="{% url 'edit_profile' %}">Edit Profile</a></li>
                     <li class="nav-about-us" role="presentation"><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
