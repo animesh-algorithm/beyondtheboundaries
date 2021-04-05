@@ -145,11 +145,14 @@
     
     <script>
         tinymce.init({
-          selector: 'textarea#editor',
-          skin: 'bootstrap',
-          plugins: 'lists, link, image, media',
-          toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link',
-          menubar: false
+			force_br_newlines : true,
+            force_p_newlines : false,
+            forced_root_block : '',
+			selector: 'textarea#editor',
+			skin: 'bootstrap',
+			plugins: 'lists, link',
+			toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link',
+			menubar: false
         });
     </script>
 
