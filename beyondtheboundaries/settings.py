@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
+import django_heroku
 from pathlib import Path
 import os
 
@@ -124,9 +125,14 @@ MEDIA_URL = '/img/'
 
 STATIC_URL = '/static/'
 
-STATICFILESDIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+# STATICFILESDIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
