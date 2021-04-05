@@ -27,11 +27,12 @@
 						<header class="post-header">
 						<h2 class="post-title"><a href="{% url 'article' article.pk %}" style="text-decoration: none;">{{ article.title }}</h2>
 						</header>
+						<a href='{% url 'article' article.pk %}'>
 						<section class="post-excerpt">
 						<p>
-							<a href='{% url 'article' article.pk %}'>{{ article.body|truncatechars_html:'200'|safe }}</a> <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
+							{{ article.body|truncatechars_html:'200'|safe } <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
 						</p>
-						</section>
+							</section></a>
 						<footer class="post-meta">
 						<img class="author-thumb" src="{% static '/img/gravatar.jpg' %}" alt="David" nopin="nopin"/>
 						<a href="{% url 'about' %}">{{ article.author.first_name }} {{ article.author.last_name }}</a>
