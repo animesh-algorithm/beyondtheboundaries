@@ -1,39 +1,111 @@
 {% extends 'main.html' %}
 {% load static %}
+{% block title %} 
+	{{ title }} | {{ author_fname }} {{ author_lname }} 
+{% endblock %}
+
+{% block extra_css %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
 
 {% block content %}
 	<header class="main-header post-head " style="background-image: url({% static '/img/random.jpg' %})">
 	<div class="vertical">
 		<div class="main-header-content inner">
-			<h1 class="post-title">{{ post.title }}</h1>
+			<h1 class="post-title" style="font-size: 5rem;">{{ title }}</h1>
 			<div class="entry-title-divider">
 				<span></span><span></span><span></span>
 			</div>
 			<section class="post-meta">
-			<time class="post-date" datetime="{{ post.created_at }}">{{ post.created_at }}</time> | <a class="scrolltocomments" href="#disqus_thread">Comments</a>
+			<time class="post-date" datetime="{{ created_at }}">{{ created_at }}</time> | <a class="scrolltocomments" href="#disqus_thread">Comments</a>
 			</section>
 		</div>
 	</div>
 	</header>
-	<main id="content" class="content" role="main">
-	<div class="wraps">
-		<img src="{% static '/img/shadow.png' %}" class="wrapshadow">
-		<article class="post featured">
-		<section class="post-content">
-		<p>
-			{{ post.body }}
+	<main class="container" role="main">
+	<div class="wraps container">
+		<!-- <img src="{% static '/img/shadow.png' %}" class="wrapshadow"> -->
+		<div class="post featured container">
+		<div class="post-content container">
+		<div class="container">
+			{% if user.is_authenticated %}
+				{% if user.id == author_id %}
+					<a href="{% url 'update_post' post_id %}"><button class='btn btn-lg btn-primary' style="font-size: 2rem;">Edit</button></a>
+					<a href="{% url 'delete_post' post_id %}"><button class='btn btn-lg btn-danger' style="font-size: 2rem;">Delete</button></a>
+				{% endif %}
+			{% endif %}
+		</div>
+		<br>
+		<p class='container'>
+			{{ body|safe }}
 		</p>
-		</section>
-		<footer class="post-footer">
+		<br>
+		{% if user.is_authenticated %}
+			<form action="{% url 'like_post' post_id %}" method="POST" class='container'>
+				{% csrf_token %}
+				<div class='d-inline position-absolute' style="margin-left: -20px; margin-top: 7px;"><span class='font-weight-bold' style="font-size: x-large;">{{ total_likes }}</span> </div>
+				<div class='d-inline mr-2'><button type="submit" name="post_id" value="{{ post_id }}" class='bg-white border-0'> <ion-icon name="thumbs-up-outline" style="font-size:xx-large"></ion-icon></button></div>
+				<div class='d-inline position-absolute ml-1' style="margin-left: -20px; margin-top: 7px;"><span class='font-weight-bold' style="font-size: x-large;">{{ comments_count }}</span> </div>
+				<div class="d-inline ml-5"><button name="post_id" value="{{ post_id }}" class='bg-white border-0 comment'> <ion-icon name="chatbox-outline" style="font-size:xx-large"></ion-icon></button></div>
+			</form>
+			<br>
+			<form method="POST" class='container d-none comment-form'>
+				{% csrf_token %}
+				{{ form.as_p }}
+				<textarea id="editor" cols="30" rows="10", placeholder="Type your comment here..."></textarea>
+				<br>
+				<button class='btn btn-secondary btn-lg submit' type="submit">Comment</button>
+			</form>
+		{% else %}
+			<form class="container" action="{% url 'login' %}">
+				<div class='d-inline position-absolute' style="margin-left: -20px; margin-top: 7px;"><span class='font-weight-bold' style="font-size: x-large;">{{ total_likes }}</span> </div>
+				<div class='d-inline mr-2'><button type="submit" name="post_id" value="{{ post_id }}" class='bg-white border-0'> <ion-icon name="thumbs-up-outline" style="font-size:xx-large"></ion-icon></button></div>
+				<div class='d-inline position-absolute ml-1' style="margin-left: -20px; margin-top: 7px;"><span class='font-weight-bold' style="font-size: x-large;">{{ comments_count }}</span> </div>
+				<div class="d-inline ml-5"><button name="id" value="{{ post_id }}" class='bg-white border-0'> <ion-icon name="chatbox-outline" style="font-size:xx-large"></ion-icon></button></div>
+			</form>
+		{% endif %}
+		<br>
+		<div class="comment-section container d-none">
+			<h2>Comments...</h2>
+			{% if not comments %}
+				<p>No Comments yet!</p>
+			{% else %}
+				{% for comment in comments %}
+					<div class="grid-item" style="width: 100%;">
+						<article class="post">
+						<div class="wrapgriditem">
+							<header class="post-header">
+								<strong>{{ comment.name }}</strong><small class='text-secondary'> | {{ comment.date_added }}</small>
+								</header>
+							<section class="post-excerpt">
+								<p>
+									{{ comment.body|truncatechars_html:'200'|safe }}
+								</p>
+							</section>
+							<!-- <footer class="post-meta">
+							<img class="author-thumb" src="{% static '/img/gravatar.jpg' %}" alt="David" nopin="nopin"/>
+							<a href="{% url 'about' %}">{{ article.author.first_name }} {{ article.author.last_name }}</a>
+							<time class="post-date" datetime="{{ article.created_at }}">{{ article.created_at }}</time>
+							</footer> -->
+						</div>
+						</article>
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+		</div>
+		<!-- <footer class="post-footer">
 		<figure class="author-image">
 		<a class="img" href="author.html" style="background-image: url({% static '/img/gravatar.jpg' %}"><span class="hidden">David's Picture</span></a>
 		</figure>
-		<section class="author">
-		<p>
+		<section class="author container">
+		<p class='container'>
 			The blog combining journalist David&#x27;s years of experience covering fashion and culture for among others. Read my blog and you will learn how to become a fashion editor
 		</p>
 		</section>
-		<section class="share">
+		<hr>
+		<div class="share">
 		<h4>Share this post</h4>
 		<a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Once%20Upon%20a%20Time&amp;url=#" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
 		<span class="hidden">Twitter</span>
@@ -44,9 +116,52 @@
 		<a class="icon-google-plus" href="https://plus.google.com/share?url=#" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
 		<span class="hidden">Google+</span>
 		</a>
-		</section>
-		</footer>
-		</article>
+		</div>
+		</footer> -->
+		</div>
 	</div>
 	</main>
+{% endblock %}
+
+{% block extra_js %}
+	<script>
+		let click = 0
+		commentBtn = document.getElementsByClassName('comment')
+		commentBtn[0].addEventListener('click', function(e) {
+			click++
+			e.preventDefault()
+			if (click%2 != 0) {
+				document.querySelector('.comment-form').classList.remove('d-none')
+				document.querySelector('.comment-section').classList.remove('d-none')
+			}
+			else {
+				document.querySelector('.comment-form').classList.add('d-none')
+				document.querySelector('.comment-section').classList.add('d-none')
+			}
+		})
+	</script>
+
+	<script src="https://cdn.tiny.cloud/1/34z4nrb4uzuoaxa1dcrv80ott2g7qmug5izy0y2lnumyoquf/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    
+    <script>
+        tinymce.init({
+          selector: 'textarea#editor',
+          skin: 'bootstrap',
+          plugins: 'lists, link, image, media',
+          toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link',
+          menubar: false
+        });
+    </script>
+
+	<script>               
+		document.querySelector('.submit').addEventListener('click', function(e) {
+			let content = tinymce.get('editor').getContent()
+			document.querySelector('.body').innerHTML = content
+		})
+	</script>
+
+	<script>
+		let name = "{{ user.first_name }} {{ user.last_name }}"
+		document.querySelector('.author').value = name
+	</script>
 {% endblock %}

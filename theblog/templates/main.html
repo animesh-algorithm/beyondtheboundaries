@@ -5,20 +5,42 @@
 <head>
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<title>Beyond The Boundaries</title>
+<title>{% block title %}{% endblock %}</title>
 <meta name="description" content="Thoughts, reviews and ideas since 1999."/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="shortcut icon" href="#">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% block extra_css %}
+
+{% endblock %}
+
 <link rel="stylesheet" type="text/css" href="{% static '/css/screen.css' %}"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,700,700italic|Playfair+Display:400,700,400italic,700italic"/>
+
 </head>
 <body class="home-template">
     <div class="site-wrapper">
         <nav class="main-nav overlay clearfix">
-            <a class="blog-logo" href="index.html"><img src="{% static '/img/logo.png' %}" alt="Fashion Critiques"/></a>
+            <div class="blog-logo">
+                {% if user.is_authenticated %}
+                    <h3 class="post-title" style="color: beige;">Hey There! {{ user.username }}</h3>
+                {% else %}
+                    <h3 class="post-title" style="color: beige;">Anonymous User</h3>
+                {% endif %}
+            </div>
             <ul id="menu">
-                <li class="nav-home nav-current" role="presentation"><a href="{% url 'home' %}">Home</a></li>
+                <li class="nav-home nav-current" role="presentation"><a href="{% url 'home' %}">Home</a></li>            
                 <li class="nav-about-us" role="presentation"><a href="{% url 'about' %}">About the Author</a></li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-home nav-about_us" role="presentation"><a href="{% url 'add_post' %}">Add Post</a></li>
+                    <li class="nav-home nav-about_us" role="presentation"><a href="{% url 'edit_profile' %}">Edit Profile</a></li>
+                    <li class="nav-about-us" role="presentation"><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-about-us" role="presentation"><a href="{% url 'register' %}">Register</a></li>
+                    <li class="nav-about-us" role="presentation"><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+
                 <span class="socialheader">
                 <a href="#"><span class='symbol'>circletwitterbird</span></a>
                 <a href="#"><span class='symbol'>circlefacebook</span></a>
@@ -27,6 +49,7 @@
                 </span>
             </ul>
         </nav>
+
         {% block content %}
 
         {% endblock %}
@@ -39,5 +62,10 @@
     <script type="text/javascript" src="{% static '/js/masonry.min.js' %}"></script>
     <script type="text/javascript" src="{% static '/js/jquery.fitvids.js' %}"></script>
     <script type="text/javascript" src="{% static '/js/index.js' %}"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+    {% block extra_js %}
+
+    {% endblock %}
 </body>
 </html>

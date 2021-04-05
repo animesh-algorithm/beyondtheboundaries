@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
+{% block title %} Beyond The Boundaries {% endblock %}
+
 
 {% block content %}
 	<header class="main-header " style="background-image: url({% static '/img/intro.jpg' %})">
@@ -23,11 +25,11 @@
 					<article class="post">
 					<div class="wrapgriditem">
 						<header class="post-header">
-						<h2 class="post-title"><a href="{% url 'article' article.pk %}">{{ article.title }}</h2>
+						<h2 class="post-title"><a href="{% url 'article' article.pk %}" style="text-decoration: none;">{{ article.title }}</h2>
 						</header>
 						<section class="post-excerpt">
 						<p>
-							{{ article.body }} <a class="read-more" href="/retro-is-the-new-modern/">&raquo;</a>
+							{{ article.body|truncatechars_html:'200'|safe }} <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
 						</p>
 						</section>
 						<footer class="post-meta">

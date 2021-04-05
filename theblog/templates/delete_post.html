@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %} Delete | {{ post.title }} {% endblock %}
+
+{% block extra_css %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+    <div class='container'>
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-8">
+                <h1 class="text-center">Delete Blog Post | <span class='text-secondary'>"{{ post.title }}"</span></h1>                <br>
+                <div class="form-group text-center">
+                    <form method="POST" style="font-size: medium;">
+                        {% csrf_token %}
+                        <br><br>
+                        <strong style="font-size: 2rem;">Are you sure you wanna delete this post?</strong>
+                        <br><br>
+                        <a href="{% url 'article' post.pk %}" class='btn btn-lg btn-danger' style="font-size: 2rem; display: inline-flex; margin: 5px">Cancel</a>
+                        <a href="{% url 'update_post' post.pk %}" class='btn btn-lg btn-primary' style="font-size: 2rem; display: inline-flex; margin: 5px">Edit Instead</a>
+                        <button class='btn btn-secondary btn-lg submit' type="submit" style="font-size: 2rem; display: inline-flex; margin: 5px">Delete</button>
+                        <div style="height: 100vh;">
+ 
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+<br>
+<h1>You're not allowed here! (and you know it...)</h1>
+<div style="height: 100vh;">
+    
+</div>
+{% endif %}
+
+{% else %}
+<br>
+<h1>You're not allowed here! (and you know it...)</h1>
+<div style="height: 100vh;">
+    
+</div>
+{% endif %}
+{% endblock %}

@@ -730,13 +730,14 @@ body.nav-opened .nav {
 /* Appears in the top left corner of your home page */
 .blog-logo {
 	display:block;
+	margin-top:10px;
 	float:left;
 	background:none !important;
 	/* Makes sure there is never a background */
 	border:none !important;
 	/* Makes sure there is never a border */
 }
-.blog-logo img {
+.blog-logo h3 {
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
@@ -747,7 +748,7 @@ body.nav-opened .nav {
 	opacity:1;
 	transition:all 0.4s;
 }
-.blog-logo img:hover {
+.blog-logo h3:hover {
 	opacity:1.0;
 	transition:all 0.4s;
 }
@@ -815,7 +816,7 @@ body.nav-opened .nav {
 	top:0;
 	left:0;
 	right:0;
-	height:54px;
+	height:65px;
 	border:none;
 	background:linear-gradient(to bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
 	background:rgba(0,0,0,0.8);
@@ -1520,9 +1521,9 @@ h2.widget-title {
 		min-height:180px;
 		padding:10% 0;
 	}
-	.blog-logo img {
+	.blog-logo h3 {
 		padding:0 0 0 10px;
-		margin-top:-54px;
+		margin-top:-56px;
 	}
 	.page-title {
 		font-size:4rem;
@@ -1626,7 +1627,7 @@ h2.widget-title {
 	.blog-logo {
 		padding:0px;
 	}
-	.blog-logo img {
+	.blog-logo h3 {
 	}
 	.menu-button {
 		padding:0 5px;
@@ -2264,3 +2265,25 @@ div#preloader {
 	padding:7px 12px;
 	height: 44px;
 }
+
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+  }
+  @media (min-width: 768px) {
+	.container {
+	  width: 750px;
+	}
+  }
+  @media (min-width: 992px) {
+	.container {
+	  width: 970px;
+	}
+  }
+  @media (min-width: 1200px) {
+	.container {
+	  width: 1170px;
+	}
+  }
