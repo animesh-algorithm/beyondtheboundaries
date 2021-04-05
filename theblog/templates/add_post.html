@@ -5,6 +5,14 @@
 {% block extra_css %}
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .post_form {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +23,7 @@
                     <div class="col-md-12 col-lg-8">
                         <h1 class="text-center">Add Blog Post</h1>
                         <br>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center post_form">
                             <form method="POST" style="font-size: medium;">
                                 {% csrf_token %}
                                 {{ form.as_p }}
