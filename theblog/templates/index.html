@@ -30,7 +30,7 @@
 						<a href="{% url 'article' article.pk %}">
 						<section class="post-excerpt">
 						<p>
-							{{ article.body|truncatechars_html:'200'|safe } <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
+							{{ article.body|truncatechars_html:'200'|safe }} <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
 						</p>
 							</section></a>
 						<footer class="post-meta">
