@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block content %}
-	<header class="main-header post-head " style="background-image: url({% static '/img/random.jpg' %})">
+	{% if post.header_image %}
+		<header class="main-header post-head " style="background-image: url({{ post.header_image.url }})">
 	<div class="vertical">
 		<div class="main-header-content inner">
 			<h1 class="post-title" style="font-size: 5rem;">{{ title }}</h1>
@@ -22,7 +23,22 @@
 			</section>
 		</div>
 	</div>
-	</header>
+		</header>
+	{% else %}
+		<header class="main-header post-head " style="background-image: url()">
+			<div class="vertical">
+				<div class="main-header-content inner">
+					<h1 class="post-title" style="font-size: 5rem;">{{ title }}</h1>
+					<div class="entry-title-divider">
+						<span></span><span></span><span></span>
+					</div>
+					<section class="post-meta">
+					<time class="post-date" datetime="{{ created_at }}">{{ created_at }}</time> | <a class="scrolltocomments" href="#disqus_thread">Comments</a>
+					</section>
+				</div>
+			</div>
+		</header>
+	{% endif %}
 	<main class="container" role="main">
 		<div class="wraps container">
 			<!-- <img src="{% static '/img/shadow.png' %}" class="wrapshadow"> -->

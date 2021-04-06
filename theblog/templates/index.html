@@ -22,11 +22,19 @@
 		<div class="grid">
 			{% for article in object_list %}
 				<div class="grid-item">
-					<article class="post">
+					<article class="post featured">
 					<div class="wrapgriditem">
-						<header class="post-header">
-						<h2 class="post-title"><a href="{% url 'article' article.pk %}" style="text-decoration: none;">{{ article.title }}</h2>
-						</header>
+						{% if article.header_image %}
+							<header class="post-header">
+							<!-- <img src="{{ article.header_image.url }}" style="height:200px; width: 100%; border-radius: 5%;"> -->
+							<!-- <br><br> -->
+							<h2 class="post-title"><a href="{% url 'article' article.pk %}" style="text-decoration: none;">{{ article.title }}</h2>
+							</header>
+						{% else %}
+							<header class="post-header">
+							<h2 class="post-title"><a href="{% url 'article' article.pk %}" style="text-decoration: none;">{{ article.title }}</h2>
+							</header>
+						{% endif %}
 						<section class="post-excerpt">
 						<p>
 							{{ article.body|truncatechars_html:'200'|safe }} <a class="read-more" href="{% url 'article' article.pk %}">&raquo;</a>
