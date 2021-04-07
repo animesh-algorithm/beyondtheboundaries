@@ -21,7 +21,11 @@
             <div class="col-md-12 col-lg-8">
                 <h1 class="text-center">Edit Profile</h1>
                 <div class="user-profile text-center">
-                    <img src="{{ user.userprofile.profile_pic.url }}" class='rounded-circle' style="width: 100px; height: 100px;">
+                    {% if user.userprofile.profile_pic %}
+                        <img src="{{ user.userprofile.profile_pic.url }}" class='rounded-circle' style="width: 100px; height: 100px;">
+                    {% else %}
+                    <img src="https://beyondtheboundaries.s3.us-east-2.amazonaws.com/images/profile/download.jpg" class='rounded-circle' style="width: 100px; height: 100px;">
+                    {% endif %}
                     <p class='text-center'>{{ user.userprofile.bio|truncatechars_html:'100'|safe }}... <a href="{% url 'edit_user_profile' %}"><ion-icon name="create-outline"></ion-icon></a></p>
                 </div>
                 <div class="form-group text-center">

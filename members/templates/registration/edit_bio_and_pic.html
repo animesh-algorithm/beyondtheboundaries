@@ -23,11 +23,24 @@
                 <div class="form-group text-center">
                     <form method="POST" style="font-size: medium;" enctype="multipart/form-data"> 
                         {% csrf_token %}
-                        <img src="{{ user.userprofile.profile_pic.url }}" class='rounded-circle' style="width: 100px; height: 100px;">
-                        <p id="user">{{ form.user }}</p>
-                        <p id='pic'>{{ form.profile_pic }}</p>
-                        <p>{{ form.bio }}</p>
-                        <textarea id="editor" cols="30" rows="30"></textarea>
+                        {% if user.is_superuser %}
+                            {% if user.userprofile.profile_pic %}
+                                <img src="{{ user.userprofile.profile_pic.url }}" class='rounded-circle' style="width: 100px; height: 100px;">
+                            {% else %}
+                                <img src="https://beyondtheboundaries.s3.us-east-2.amazonaws.com/images/profile/download.jpg" class='rounded-circle' style="width: 100px; height: 100px;">
+                            {% endif %}
+                        
+                            <p id="user">{{ form.user }}</p>
+                            <p id='pic'>{{ form.profile_pic }}</p>
+                            <p>{{ form.bio }}</p>
+                            <textarea id="editor" cols="30" rows="30"></textarea>
+                        {% else %}
+                            <p id="user">{{ form.user }}</p>
+                            <p id='pic'>{{ form.profile_pic }}</p>
+                            <p>{{ form.bio }}</p>
+                            <textarea id="editor" cols="30" rows="30"></textarea>
+
+                        {% endif %}
                         {% if form.errors %}
                         <br>
 
@@ -48,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 250vh;">
+    <div style="height: 200vh;">
             
     </div>
 {% endblock %}
@@ -57,8 +70,11 @@
     <script src="https://cdn.tiny.cloud/1/34z4nrb4uzuoaxa1dcrv80ott2g7qmug5izy0y2lnumyoquf/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     
     <script>
-        document.getElementById('pic').firstElementChild.style.display='none'
-        document.getElementById('pic').firstChild.remove()
+        {% if user.is_superuser %}
+            document.getElementById('pic').firstElementChild.style.display='none'
+            document.getElementById('pic').firstChild.remove()
+            // document.getElementById('pic').style.display='none'
+        {% endif %}
         document.getElementById('user').style.display='none'
 
         tinymce.init({
@@ -72,6 +88,7 @@
             menubar: false
         });
         document.getElementById('editor').value = document.querySelector('#bio').value
+ 
         document.querySelector('.submit').addEventListener('click', function(e) {
             let content = tinymce.get('editor').getContent()
             // console.log(content)
@@ -80,6 +97,6 @@
     </script>
     <script>
         let name = "{{ user.id }}"
-        // document.getElementById('user').firstElementChild.value = name
+        document.getElementById('user').firstElementChild.value = name
     </script>
 {% endblock %}

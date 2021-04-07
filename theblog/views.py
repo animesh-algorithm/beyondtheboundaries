@@ -5,10 +5,15 @@ from .models import Post, Comment
 from .forms import PostForm, UpdatePostForm, CommentForm
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 # Create your views here.
 def about(request):
-    return render(request, 'about.html', {})
+    users = User.objects.all()
+    for user in users:
+        if user.is_superuser:
+            bio = user.userprofile.bio
+    return render(request, 'about.html', {'bio': bio})
 
 def LikeView(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))

@@ -43,4 +43,7 @@ class EditUserProfileView(generic.UpdateView):
     success_url = reverse_lazy('edit_profile')
 
     def get_object(self):
-        return self.request.user.userprofile
+        try:
+            return self.request.user.userprofile
+        except:
+            pass
