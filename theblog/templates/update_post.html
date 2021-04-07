@@ -16,8 +16,9 @@
                 <h1 class="text-center">Update Blog Post | <span class='text-secondary'>"{{ post.title }}"</span></h1>
                 <br>
                 <div class="form-group">
-                    <form method="POST" style="font-size: medium;">
+                    <form method="POST" style="font-size: medium;" enctype="multipart/form-data">
                         {% csrf_token %}
+                        {{ form.media }}
                         {{ form.as_p }}
                         <textarea id="editor" cols="30" rows="30", placeholder="Type the article here..."></textarea>
                         <br>

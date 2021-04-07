@@ -23,7 +23,7 @@ class PostForm(forms.ModelForm):
 class UpdatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'body')
+        fields = ('title', 'body', 'header_image')
 
         labels = {
             'title': '',

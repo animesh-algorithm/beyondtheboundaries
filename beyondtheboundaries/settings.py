@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'theblog',
-    'members'
+    'members',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,16 @@ LOGOUT_REDIRECT_URL = 'home'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+AWS_ACCESS_KEY_ID = 'AKIA4VXR2QRLUTG4IDHH'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'beyondtheboundaries'
+AWS_S3_ADDRESSING_STYLE = "virtual"
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_REGION_NAME = 'us-east-2'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
