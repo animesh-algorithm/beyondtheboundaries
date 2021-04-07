@@ -10,22 +10,19 @@
 {% block content %}
 {% if user.is_authenticated %}
 {% if user.id == post.author.id %}
-    <div class='container'>
-        <div class="row justify-content-md-center">
-            <div class="col-md-12 col-lg-8">
-                <h1 class="text-center">Update Blog Post | <span class='text-secondary'>"{{ post.title }}"</span></h1>
+    <div class='container text-center'>
+        <br>
+        <h1 class="text-center">Update Blog Post | <span class='text-secondary'>"{{ post.title }}"</span></h1>
+        <br>
+        <div class="form-group">
+            <form method="POST" style="font-size: medium;" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <textarea id="editor" cols="30" rows="30", placeholder="Type the article here..."></textarea>
                 <br>
-                <div class="form-group">
-                    <form method="POST" style="font-size: medium;" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form.media }}
-                        {{ form.as_p }}
-                        <textarea id="editor" cols="30" rows="30", placeholder="Type the article here..."></textarea>
-                        <br>
-                        <button class='btn btn-secondary btn-lg submit' type="submit">Update</button>
-                    </form>
-                </div>
-            </div>
+                <button class='btn btn-secondary btn-lg submit' type="submit">Update</button>
+            </form>
         </div>
     </div>
     {% else %}
