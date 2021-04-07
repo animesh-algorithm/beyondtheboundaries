@@ -20,7 +20,10 @@
         <div class="row justify-content-md-center">
             <div class="col-md-12 col-lg-8">
                 <h1 class="text-center">Edit Profile</h1>
-                <br>
+                <div class="user-profile text-center">
+                    <img src="{{ user.userprofile.profile_pic.url }}" class='rounded-circle' style="width: 100px; height: 100px;">
+                    <p class='text-center'>{{ user.userprofile.bio|truncatechars_html:'100'|safe }}... <a href="{% url 'edit_user_profile' %}"><ion-icon name="create-outline"></ion-icon></a></p>
+                </div>
                 <div class="form-group text-center">
                     <form method="POST" style="font-size: medium;">
                         {% csrf_token %}
@@ -48,7 +51,9 @@
                         <a href="{% url 'change_password' %}">Change Password</a><br>
                         <br>
                         <button class='btn btn-secondary btn-lg submit' style="font-size: 20px;" type="submit">Update Profile</button>
+                        <br>
                     </form>
+                    <br><br><br>
                 </div>
             </div>
         </div>

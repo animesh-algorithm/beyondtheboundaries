@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from theblog.models import UserProfile
 
 class UserRegistrationForm(UserCreationForm):
 
@@ -140,6 +141,15 @@ class EditProfileForm(UserChangeForm):
     #         if User.objects.filter(username=username).exists():
     #             raise ValidationError('Username Already Taken')
     #     return self.cleaned_data
+
+class EditUserProfileForm(UserChangeForm):
+    class Meta:
+        model = UserProfile
+        fields = ('bio', 'profile_pic', 'user')
+
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control', 'id': 'bio', 'placeholder': 'Type your content here....', 'style': 'display:none'})
+        }
 
 class PasswordChangingForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):

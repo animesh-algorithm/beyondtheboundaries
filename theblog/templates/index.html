@@ -41,7 +41,7 @@
 						</p>
 							</section>
 						<footer class="post-meta">
-						<img class="author-thumb" src="{% static '/img/gravatar.jpg' %}" alt="David" nopin="nopin"/>
+						<img class="author-thumb" src="{{ user.userprofile.profile_pic.url }}" alt="David" nopin="nopin"/>
 						<a href="{% url 'about' %}">{{ article.author.first_name }} {{ article.author.last_name }}</a>
 						<time class="post-date" datetime="{{ article.created_at }}">{{ article.created_at }}</time>
 						</footer>

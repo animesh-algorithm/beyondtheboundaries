@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .forms import UserRegistrationForm, EditProfileForm, PasswordChangingForm
+from .forms import UserRegistrationForm, EditProfileForm, PasswordChangingForm, EditUserProfileForm
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserChangeForm
@@ -36,3 +36,11 @@ class UserEditView(generic.UpdateView):
 
     def get_object(self):
         return self.request.user
+
+class EditUserProfileView(generic.UpdateView):
+    form_class = EditUserProfileForm
+    template_name = 'registration/edit_bio_and_pic.html'
+    success_url = reverse_lazy('edit_profile')
+
+    def get_object(self):
+        return self.request.user.userprofile

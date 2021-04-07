@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %} Edit Profile | Beyond the Boundaries {% endblock %}
+
+{% block extra_css %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .edit {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class='container edit'>
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-8">
+                <h1 class="text-center">Edit Profile</h1>
+                <div class="form-group text-center">
+                    <form method="POST" style="font-size: medium;" enctype="multipart/form-data"> 
+                        {% csrf_token %}
+                        <img src="{{ user.userprofile.profile_pic.url }}" class='rounded-circle' style="width: 100px; height: 100px;">
+                        <p id="user">{{ form.user }}</p>
+                        <p id='pic'>{{ form.profile_pic }}</p>
+                        <p>{{ form.bio }}</p>
+                        <textarea id="editor" cols="30" rows="30"></textarea>
+                        {% if form.errors %}
+                        <br>
+
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                <br>
+                                    {{ error }} 
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                        <a href="{% url 'change_password' %}">Change Password</a><br>
+                        <br>
+                        <button class='btn btn-secondary btn-lg submit' style="font-size: 20px;" type="submit">Update Profile</button>
+                        <br>
+                    </form>
+                    <br><br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 250vh;">
+            
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdn.tiny.cloud/1/34z4nrb4uzuoaxa1dcrv80ott2g7qmug5izy0y2lnumyoquf/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    
+    <script>
+        document.getElementById('pic').firstElementChild.style.display='none'
+        document.getElementById('pic').firstChild.remove()
+        document.getElementById('user').style.display='none'
+
+        tinymce.init({
+            force_br_newlines : true,
+            force_p_newlines : false,
+            forced_root_block : '',
+            selector: 'textarea#editor',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false
+        });
+        document.getElementById('editor').value = document.querySelector('#bio').value
+        document.querySelector('.submit').addEventListener('click', function(e) {
+            let content = tinymce.get('editor').getContent()
+            // console.log(content)
+            document.querySelector('#bio').value = content
+        })
+    </script>
+    <script>
+        let name = "{{ user.id }}"
+        // document.getElementById('user').firstElementChild.value = name
+    </script>
+{% endblock %}
