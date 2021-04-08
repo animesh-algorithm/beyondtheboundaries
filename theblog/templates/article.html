@@ -19,7 +19,7 @@
 				<span></span><span></span><span></span>
 			</div>
 			<section class="post-meta">
-			<time class="post-date" datetime="{{ created_at }}">{{ created_at }}</time> | <a class="scrolltocomments" href="#disqus_thread">Comments</a>
+			<time class="post-date" datetime="{{ created_at }}">{{ created_at }}</time> | <a class="scrolltocomments" href="#comment-form">Comments</a>
 			</section>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 							</div>
 						</form>
 						<br>
-						<form method="POST" class='container d-none comment-form'>
+						<form method="POST" class='container d-none comment-form' id='comment-form'>
 							{% csrf_token %}
 							{{ form.as_p }}
 							<textarea id="editor" cols="30" rows="10", placeholder="Type your comment here..."></textarea>
@@ -133,7 +133,7 @@
 					</figure>
 					<section class="author container">
 					<p class='container'>
-						{{ post.author.userprofile.bio|truncatechars_html:'1000'|safe }}
+						{{ post.author.userprofile.bio|safe }}
 					</p>
 					</section>
 					<hr>
