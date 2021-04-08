@@ -5,20 +5,13 @@
 {% block extra_css %}
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-    .edit {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
+
 {% endblock %}
 
 {% block content %}
     <div class='container edit'>
-        <div class="row justify-content-md-center">
-            <div class="col-md-12 col-lg-8">
+            <div class="container text-center" style="max-width: 1000px;">
+                <br>
                 <h1 class="text-center">Edit Profile</h1>
                 <div class="form-group text-center">
                     <form method="POST" style="font-size: medium;" enctype="multipart/form-data"> 
