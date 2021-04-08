@@ -127,17 +127,17 @@
 						{% endif %}
 					</div>
 				</div>
-			<!-- <footer class="post-footer">
+			<footer class="post-footer">
 			<figure class="author-image">
-			<a class="img" href="author.html" style="background-image: url({% static '/img/gravatar.jpg' %}"><span class="hidden">David's Picture</span></a>
+			<a class="img" href="{% url 'about' %}" style="background-image: url({{ post.author.userprofile.profile_pic.url }}"><span class="hidden">David's Picture</span></a>
 			</figure>
 			<section class="author container">
 			<p class='container'>
-				The blog combining journalist David&#x27;s years of experience covering fashion and culture for among others. Read my blog and you will learn how to become a fashion editor
+				{{ post.author.userprofile.bio|truncatechars_html:'350'|safe }}....
 			</p>
 			</section>
 			<hr>
-			<div class="share">
+			<!-- <div class="share">
 			<h4>Share this post</h4>
 			<a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Once%20Upon%20a%20Time&amp;url=#" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
 			<span class="hidden">Twitter</span>
@@ -148,11 +148,13 @@
 			<a class="icon-google-plus" href="https://plus.google.com/share?url=#" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
 			<span class="hidden">Google+</span>
 			</a>
-			</div>
-			</footer> -->
+			</div> -->
+			</footer>
 			</div>
 		</div>
 	</main>
+	{% include 'back_to_top.html' %}
+
 {% endblock %}
 
 {% block extra_js %}

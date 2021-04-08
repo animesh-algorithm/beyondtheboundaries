@@ -13,6 +13,7 @@ import os
 import django_heroku
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -139,12 +140,12 @@ LOGOUT_REDIRECT_URL = 'home'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-AWS_ACCESS_KEY_ID = 'AKIA4VXR2QRLUTG4IDHH'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'beyondtheboundaries'
-AWS_S3_ADDRESSING_STYLE = "virtual"
-AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_S3_REGION_NAME = 'us-east-2'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_ADDRESSING_STYLE = config('AWS_S3_ADDRESSING_STYLE')
+AWS_S3_SIGNATURE_VERSION = config('AWS_S3_SIGNATURE_VERSION')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
