@@ -98,7 +98,7 @@
 						</form>
 					{% endif %}
 					<br>
-					<div class="comment-section container d-none">
+					<div class="comment-section container">
 						<h2>Comments...</h2>
 						{% if not comments %}
 							<p>No Comments yet!</p>
@@ -166,11 +166,9 @@
 			e.preventDefault()
 			if (click%2 != 0) {
 				document.querySelector('.comment-form').classList.remove('d-none')
-				document.querySelector('.comment-section').classList.remove('d-none')
 			}
 			else {
 				document.querySelector('.comment-form').classList.add('d-none')
-				document.querySelector('.comment-section').classList.add('d-none')
 			}
 		})
 	</script>
