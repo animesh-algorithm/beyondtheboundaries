@@ -42,8 +42,8 @@
 	<main class="container" role="main">
 		<div class="wraps container">
 			<!-- <img src="{% static '/img/shadow.png' %}" class="wrapshadow"> -->
-			<div class="post featured container">
-				<div class="post-content container">
+			<div class="post featured container row">
+				<div class="post-content container col-md-8">
 					<div class="container">
 						{% if user.is_authenticated %}
 							{% if user.id == author_id %}
@@ -127,29 +127,29 @@
 						{% endif %}
 					</div>
 				</div>
-			<footer class="post-footer">
-			<figure class="author-image">
-			<a class="img" href="{% url 'about' %}" style="background-image: url({{ post.author.userprofile.profile_pic.url }}"><span class="hidden">David's Picture</span></a>
-			</figure>
-			<section class="author container">
-			<p class='container'>
-				{{ post.author.userprofile.bio|truncatechars_html:'350'|safe }}....
-			</p>
-			</section>
-			<hr>
-			<!-- <div class="share">
-			<h4>Share this post</h4>
-			<a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Once%20Upon%20a%20Time&amp;url=#" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-			<span class="hidden">Twitter</span>
-			</a>
-			<a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=#" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-			<span class="hidden">Facebook</span>
-			</a>
-			<a class="icon-google-plus" href="https://plus.google.com/share?url=#" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-			<span class="hidden">Google+</span>
-			</a>
-			</div> -->
-			</footer>
+				<footer class="post-footer container text-center col-md-4">
+					<figure class="author-image">
+					<a class="img" href="{% url 'about' %}" style="background-image: url({{ post.author.userprofile.profile_pic.url }}"><span class="hidden">David's Picture</span></a>
+					</figure>
+					<section class="author container">
+					<p class='container'>
+						{{ post.author.userprofile.bio|truncatechars_html:'1000'|safe }}
+					</p>
+					</section>
+					<hr>
+					<!-- <div id="share">
+					<h4>Share this post</h4>
+					<a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Once%20Upon%20a%20Time&amp;url=#" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+					<span class="hidden">Twitter</span>
+					</a>
+					<a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=#" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+					<span class="hidden">Facebook</span>
+					</a>
+					<a class="icon-google-plus" href="https://plus.google.com/share?url=#" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+					<span class="hidden">Google+</span>
+					</a>
+					</div> -->
+				</footer>
 			</div>
 		</div>
 	</main>
