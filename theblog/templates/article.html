@@ -42,9 +42,9 @@
 	<main class="container" role="main">
 		<div class="wraps container">
 			<!-- <img src="{% static '/img/shadow.png' %}" class="wrapshadow"> -->
-			<div class="post featured container row">
-				<div class="post-content container col-md-8">
-					<div class="container">
+			<div class="post featured">
+				<div class="post-content">
+					<div class="">
 						{% if user.is_authenticated %}
 							{% if user.id == author_id %}
 								<a href="{% url 'update_post' post_id %}"><button class='btn btn-lg btn-primary' style="font-size: 2rem;">Edit</button></a>
@@ -53,7 +53,7 @@
 						{% endif %}
 					</div>
 					<br>
-					<p class='container'>
+					<p>
 						{{ body|safe }}
 					</p>
 					<br>
@@ -127,15 +127,15 @@
 						{% endif %}
 					</div>
 				</div>
-				<footer class="post-footer container text-center col-md-4">
+				<footer class="post-footer container text-center">
 					<figure class="author-image">
-					<a class="img" href="{% url 'about' %}" style="background-image: url({{ post.author.userprofile.profile_pic.url }}"><span class="hidden">David's Picture</span></a>
+					<a class="img" href="{% url 'about' %}" style="background-image: url({{ post.author.userprofile.profile_pic.url }}"><span class="hidden">David's Picture</span>
 					</figure>
 					<section class="author container">
 					<p class='container'>
-						{{ post.author.userprofile.bio|safe }}
+						{{ post.author.userprofile.bio|truncatechars_html:'200'|safe }}
 					</p>
-					</section>
+					</section></a>
 					<hr>
 					<!-- <div id="share">
 					<h4>Share this post</h4>
