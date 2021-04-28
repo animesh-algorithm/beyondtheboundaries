@@ -28,7 +28,7 @@ SECRET_KEY = 'z%lc9iai76w$)_k(z%5zr^9k99l76@=10n^6)s9c@%0=pq5y*-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.beyondtheboundries.com', '*']
 
 
 # Application definition
