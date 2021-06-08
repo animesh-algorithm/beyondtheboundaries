@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'beyondtheboundaries.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'jdoauext',
+        'USER': 'jdoauext',
+        'PASSWORD': 'cAjH9W-Hr5g9__aw-9IuYm-gzWsAFZMu',
+        'HOST': 'queenie.db.elephantsql.com',
+        'PORT': '5432'
     }
 }
 
